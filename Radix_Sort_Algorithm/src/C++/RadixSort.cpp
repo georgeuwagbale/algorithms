@@ -6,8 +6,15 @@ using namespace std;
 int get_maximum_value(int arr[], int arr_length) {
     int max = arr[0];
     for (int i = 1; i < arr_length; i++) {
-        if (arr[i] > max) {
-            max = arr[i];
+        if (arr[i] < 0){
+            if (-arr[i] > -max){
+                max = arr[i];
+            }
+        }
+        else{
+            if(arr[i] > max) {
+                max = arr[i];
+            }
         }
     }
     return max;
@@ -91,7 +98,7 @@ void radix_sort(int arr[], int length) {
 }
 
 int main() {
-    int arr[] = {1, 0, 4, 5, 7, -3, 9, 2};
+    int arr[] = {5, 7, 3, 9, 2};
     int length = sizeof(arr) / sizeof(int);
     radix_sort(arr, length);
     cout << "[";

@@ -18,6 +18,7 @@ def counting_sort_positive(arr, exp):
         position_in_array = count_array[(current // exp) % 10] - 1
         output[position_in_array] = current
         count_array[(current // exp) % 10] -= 1
+
     for i in range(len(arr)):
         arr[i] = output[i]
 
@@ -34,6 +35,7 @@ def counting_sort_negative(arr, exp):
         position_in_array = count_array[9 - ((-current // exp) % 10)] - 1
         output[position_in_array] = current
         count_array[9 - ((-current // exp) % 10)] -= 1
+
     for i in range(len(arr)):
         arr[i] = output[i]
 
@@ -61,17 +63,18 @@ def radix_sort(arr):
             counting_sort_negative(negative, exp)
             exp *= 10
 
-    pos_index = len(positive) - 1
-    neg_index = 0
+    pos_index = 0
+    neg_index = len(negative) - 1
     for i in range(len(arr)):
-        if neg_index < len(negative):
+        if neg_index >= 0:
             arr[i] = negative[neg_index]
-            neg_index += 1
+            neg_index -= 1
         else:
             arr[i] = positive[pos_index]
-            pos_index -= 1
+            pos_index += 1
 
 
 arr = [1, 0, 4, 5, 7, -3, 9, 2]
 radix_sort(arr)
+# arr.reverse()  # Reverse the order of the array
 print(arr)
